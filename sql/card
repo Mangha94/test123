@@ -1,0 +1,24 @@
+CREATE TABLE cardcategory (
+  cardCategoryNo int(11) NOT NULL AUTO_INCREMENT,
+  cardCategoryTitle varchar(255) DEFAULT NULL,
+  PRIMARY KEY (cardCategoryNo)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
+
+CREATE TABLE cardcontent (
+  contentNo int(11) NOT NULL AUTO_INCREMENT,
+  cardCategoryNo int(11) DEFAULT NULL,
+  content text,
+  completed tinyint(1) DEFAULT NULL,
+  title varchar(255) DEFAULT NULL,
+  PRIMARY KEY (contentNo)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
+
+CREATE TABLE cardcomment (
+  CommentNo int(11) NOT NULL AUTO_INCREMENT,
+  cardCategoryNo int(11) DEFAULT NULL,
+  contentNo int(11) DEFAULT NULL,
+  comment varchar(255) DEFAULT NULL,
+  commentWriter varchar(50) DEFAULT NULL,
+  commentRegDate datetime DEFAULT NULL,
+  PRIMARY KEY (CommentNo)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8
