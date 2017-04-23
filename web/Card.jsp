@@ -48,12 +48,7 @@
 
 	function showAddCategory (categoryNo)
 	{
-		var registFormDiv = document.getElementById("registForm_" + categoryNo);
-
-		if (registFormDiv.style.display == "block")
-			registFormDiv.style.display = "none";
-		else
-			registFormDiv.style.display = "block";
+		$("#registForm_" + categoryNo).toggle(500);
 	}
 
 	function onSubmitCategory (myForm)
@@ -62,7 +57,9 @@
 
 		if (myForm.cardCategoryTitle.value.trim() == "")
 		{
-			alert ("카테고리명을 입력해주세요");
+			$("#errorAlert").text ("카테고리명을 입력해주세요").show (300).delay (800).hide (400);
+
+
 			flag = false;
 
 			myForm.cardCategoryTitle.focus ();
@@ -80,6 +77,9 @@
 		return flag;
 	}
 </script>
+
+
+<div class="alert alert-danger" role="alert" id = "errorAlert" style="display:none; position: absolute; top:10px; left:10px;width:500px;"></div>
 
 
 <c:forEach items="${categoryList}" var="category">
