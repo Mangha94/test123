@@ -30,6 +30,13 @@
 		location.href = "/card?cardCategoryNo=" + cardCategoryNo + "&contentNo=" + contentNo + "&commentNo=" + commentNo;
 	}
 
+	function showLayer ()
+	{
+		$("#testLayer").load ("/hello.jsp", function () {
+			$("#testLayer").show ();
+		});
+	}
+
 	/*function submitCategory ()
 	{
 		var flag = true;
@@ -78,8 +85,15 @@
 	}
 </script>
 
+<%--<div id = "testLayer" style="display:none; position: absolute; top:10px; left:10px;width:500px;">--%>
+
+<%--</div>--%>
 
 <div class="alert alert-danger" role="alert" id = "errorAlert" style="display:none; position: absolute; top:10px; left:10px;width:500px;"></div>
+
+<div id = "testLayer">
+	안녕하세요
+</div>
 
 
 <c:forEach items="${categoryList}" var="category">
@@ -204,7 +218,10 @@
 			       placeholder="카테고리명" >
 			<input type="hidden" name="cmd" value="addCardCategory">
 			<input type="submit" value="등록하기">
+
+
 			<%--<a href = "javascript:submitCategory()" class = "btn btn-primary">등록하기</a>--%>
+			<a href = "javascript:showLayer()" class = "btn btn-primary">테스트</a>
 		</c:otherwise>
 	</c:choose>
 </form>
