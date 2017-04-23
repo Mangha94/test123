@@ -1,6 +1,7 @@
 package kr.co.ttinfo.bookManager.Servlet;
 
-import kr.co.ttinfo.bookManager.book.model.timeTable.*;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,8 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+
+import kr.co.ttinfo.bookManager.book.model.timeTable.CardCategory;
+import kr.co.ttinfo.bookManager.book.model.timeTable.CardCenter;
+import kr.co.ttinfo.bookManager.book.model.timeTable.CardComment;
+import kr.co.ttinfo.bookManager.book.model.timeTable.CardContent;
 
 @WebServlet(value = "/card")
 public class CardServlet extends HttpServlet {
@@ -49,7 +53,9 @@ public class CardServlet extends HttpServlet {
             req.setAttribute("getComment",getComment);
 
             resp.sendRedirect("/card?cardCategoryNo="+cardCategoryNo+"&contentNo="+contentNo);
-        } else if (cardCategoryNoStr != null && contentNoStr != null) {
+        }
+        else if (cardCategoryNoStr != null && contentNoStr != null)
+        {
             int cardCategoryNo=Integer.parseInt(cardCategoryNoStr);
             int contentNo = Integer.parseInt(contentNoStr);
             CardContent getContent=cardCenter.getContent(contentNo);
@@ -58,7 +64,8 @@ public class CardServlet extends HttpServlet {
             req.setAttribute("getContent",getContent);
 
             resp.sendRedirect("/card?cardCategoryNo="+cardCategoryNo+"&contentNo="+contentNo);
-        }else if (cardCategoryNoStr != null) {
+        }
+        else if (cardCategoryNoStr != null) {
             int cardCategoryNo = Integer.parseInt(cardCategoryNoStr);
             CardCategory getCardCategory=cardCenter.getCardCategory(cardCategoryNo);
 
@@ -129,6 +136,16 @@ public class CardServlet extends HttpServlet {
                 req.setAttribute("contentNo", contentNo);
                 req.setAttribute("contentList", contentList);
                 req.setAttribute("commentList", commentList);
+
+				String commentNoStr = req.getParameter("commentNo");
+
+				if (commentNoStr != null) {
+					int commentNo = Integer.parseInt(commentNoStr);
+					CardComment getComment=cardCenter.getComment(commentNo);
+
+					req.setAttribute("commentNo",commentNo);
+					req.setAttribute("getComment",getComment);
+				}
             }
         }
 

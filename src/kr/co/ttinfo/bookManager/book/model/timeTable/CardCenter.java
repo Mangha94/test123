@@ -1,13 +1,13 @@
 package kr.co.ttinfo.bookManager.book.model.timeTable;
 
-import kr.co.ttinfo.bookManager.book.BookManageDB;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import kr.co.ttinfo.bookManager.book.BookManageDB;
 
 public class CardCenter {
 
@@ -164,7 +164,7 @@ public class CardCenter {
         CardComment comment = null;
         try {
             Connection conn = bookManageDB.makeConnect();
-            String sql = "SELECT * FROM cardCommnet WHERE commentNo=?";
+            String sql = "SELECT * FROM cardComment WHERE commentNo=?";
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setInt(1, commentNo);
 
