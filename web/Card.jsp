@@ -50,7 +50,10 @@
 	{
 		var registFormDiv = document.getElementById("registForm_" + categoryNo);
 
-		registFormDiv.style.display = "block";
+		if (registFormDiv.style.display == "block")
+			registFormDiv.style.display = "none";
+		else
+			registFormDiv.style.display = "block";
 	}
 
 	function onSubmitCategory (myForm)
