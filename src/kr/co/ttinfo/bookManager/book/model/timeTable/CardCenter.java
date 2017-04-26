@@ -278,11 +278,10 @@ public class CardCenter {
     public void modifyContent(CardContent content){
         try {
             Connection conn = bookManageDB.makeConnect();
-            String sql = "UPDATE cardContent SET content=?, title=? WHERE contentNo=?";
+            String sql = "UPDATE cardContent SET content=? WHERE contentNo=?";
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, content.getContent());
-            pStmt.setString(2, content.getTitle());
-            pStmt.setInt(3, content.getContentNo());
+            pStmt.setInt(2, content.getContentNo());
 
             pStmt.executeUpdate();
 
@@ -300,7 +299,7 @@ public class CardCenter {
     public void modifyComment(CardComment comment) {
         try {
             Connection conn = bookManageDB.makeConnect();
-            String sql = "UPDATE cardComment SET comment=?, contentWriter=? WHERE commentNo=?";
+            String sql = "UPDATE cardComment SET comment=?, commentWriter=? WHERE commentNo=?";
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, comment.getComment());
             pStmt.setString(2, comment.getCommentWriter());

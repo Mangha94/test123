@@ -126,13 +126,18 @@ public class BoardListServlet extends HttpServlet{
      * @param resp
      * @throws IOException
      */
-    private void deleteBoard(BoardCenter bc,HttpServletRequest req, HttpServletResponse resp) throws IOException
-    {
+    private void deleteBoard(BoardCenter bc,HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String no = req.getParameter("no");
         bc.remove(Integer.parseInt(no));
         bc.deleteAllComment(Integer.parseInt(no));
-        resp.sendRedirect("/board");
+        //resp.sendRedirect("/board");
 
+        req.setAttribute("message","삭제되었습니다");
+        req.setAttribute("url","/board");
+
+        RequestDispatcher view = req.getRequestDispatcher("WEB-INF/move.jsp");
+
+        view.forward(req, resp);
         return;
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
