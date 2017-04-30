@@ -98,9 +98,9 @@ public class CardServlet extends HttpServlet {
             cardCenter.deleteComment(commentNo);
 
             //resp.sendRedirect("/card?cardCategoryNo=" + cardCategoryNo + "&contentNo=" + contentNo);
-            req.setAttribute("message","삭제되었습니다");
-            req.setAttribute("url","/card");
-            RequestDispatcher view = req.getRequestDispatcher("WEB-INF/move.jsp");
+            req.setAttribute("message","{cmd:'OK',message:'ok'}");
+
+            RequestDispatcher view = req.getRequestDispatcher("WEB-INF/outPut.jsp");
 
             view.forward(req, resp);
         } else if (cardCategoryNoStr != null && contentNoStr != null) {

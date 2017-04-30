@@ -18,7 +18,29 @@
 
     function deleteCommentv(cardCategoryNo, contentNo, commentNo) {
         if (confirm("삭제하시겠습니까?")) {
-            location.href = "/card?cmd=delete&cardCategoryNo=" + cardCategoryNo + "&contentNo=" + contentNo + "&commentNo=" + commentNo;
+            //location.href = "/card?cmd=delete&cardCategoryNo=" + cardCategoryNo + "&contentNo=" + contentNo + "&commentNo=" + commentNo;
+            $.ajax({
+                type:"GET",
+                url:"/card?cmd=delete&cardCategoryNo=" + cardCategoryNo + "&contentNo=" + contentNo + "&commentNo=" + commentNo,
+                dataType:"html",
+                success:function(data,textStatus)
+                {
+                    result=data;
+                    console.log(data);
+                    //alert("등록되었습니다");
+                    //location.href="/card";
+                    //result = eval(data.trim());
+                    console.log(result);
+                    if(result.cmd=="OK"){
+                        alert("삭제되었습니다");
+                    }else
+                        alert("실패하였습니다");
+
+
+                    reloadCommentList(contentNo);
+                }
+
+            })
         }
     }
 
@@ -83,7 +105,7 @@
         $("#contentForm_" + categoryNo).toggle(500);
     }
     function hi() {
-        $("#testLayer").append("<div class='well'>test</div>");
+        $("#testLayer").append("<div class='well'>광고 광고 광고</div>");
     }
     function onSubmitComment(myForm) {
         var flag = true;
@@ -116,17 +138,17 @@
             type:"POST",
             url:myForm.action,
             dataType:"html",
+           // data:{cmd:"test",contentNo:123},
             data:$(myForm).serialize(),
             success:function(data,textStatus)
             {
                 //alert("등록되었습니다");
-                //location.href="/card";
 
-                console.log($(myForm).children("[name='contentNo']").val());
-                $("#commentForm_" + myForm.contentNo.value).load("/card?cmd=commentList&contentNo="+myForm.contentNo.value);
+                var contentNo=$(myForm).children("[name='contentNo']").val();
+                reloadCommentList(contentNo);
             }
 
-        })
+        });
 
         // 체크 실패! Submit 이 일어나면 안된다.
         //if (flag == false) {
@@ -138,6 +160,9 @@
         }
 
         return flag;
+    }
+    function reloadCommentList(contentNo) {
+        $("#commentForm_" + contentNo).load("/card?cmd=commentList&contentNo=" + contentNo);
     }
 </script>
 
